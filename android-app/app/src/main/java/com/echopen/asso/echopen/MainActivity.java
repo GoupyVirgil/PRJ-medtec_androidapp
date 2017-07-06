@@ -7,6 +7,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+
 
 import com.echopen.asso.echopen.SettingsActivity;
 /**
@@ -33,8 +35,8 @@ public class MainActivity extends Activity implements android.view.View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button start_button = (Button) findViewById(R.id.button_start);
-         start_button.setOnClickListener(this);
+        ImageButton start_button = (ImageButton) findViewById(R.id.button_start);
+        start_button.setOnClickListener(this);
 
     }
 
@@ -64,7 +66,7 @@ public class MainActivity extends Activity implements android.view.View.OnClickL
         switch (view.getId()){
 
             case R.id.button_start:
-                startActivity(new Intent( this, SettingsActivity.class));
+                startActivity(new Intent( this, DashboardActivity.class));
                 break;
         }
     }
