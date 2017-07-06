@@ -21,6 +21,8 @@ import com.echopen.asso.echopen.utils.Constants;
 
 import java.io.File;
 import java.io.FileOutputStream;
+
+import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
@@ -57,8 +59,8 @@ public class ScanActivity extends Activity implements EchographyImageVisualisati
         EchographyImageVisualisationPresenter presenter = new EchographyImageVisualisationPresenter(serviceEcho, this);
         EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode(Constants.Http.REDPITAYA_IP, REDPITAYA_PORT);
         serviceEcho.connect(mode, this);
-
-
+        HashMap info = (HashMap) getIntent().getSerializableExtra("info");
+        Log.d("IIIICCCCCCCCCCCIIIIIII", ""+info.size());
         presenter.listenEchographyImageStreaming();
 
     }
