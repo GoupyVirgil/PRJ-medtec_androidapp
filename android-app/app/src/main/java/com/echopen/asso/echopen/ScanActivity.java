@@ -51,16 +51,31 @@ public class ScanActivity extends Activity implements EchographyImageVisualisati
         screenShot_Button.setOnClickListener(this);
         i1 = UUID.randomUUID().toString();
 
-        ImageView type_image = (ImageView) findViewById(R.id.type_image);
-        type_image.setImageResource(R.drawable.picto_estomac_off);
-
         RenderingContextController rdController = new RenderingContextController();
         EchographyImageStreamingService serviceEcho =  new EchographyImageStreamingService(rdController);
         EchographyImageVisualisationPresenter presenter = new EchographyImageVisualisationPresenter(serviceEcho, this);
         EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode(Constants.Http.REDPITAYA_IP, REDPITAYA_PORT);
         serviceEcho.connect(mode, this);
+
+        // GET DATA
         HashMap info = (HashMap) getIntent().getSerializableExtra("info");
-        Log.d("IIIICCCCCCCCCCCIIIIIII", ""+info.size());
+        Object imageOrgane = info.get("ORGANE");
+        // CHANGE IMAGE
+        ImageView typeOrgane = (ImageView) findViewById(R.id.type_organe);
+
+        switch (imageOrgane.toString()) {
+            case "foetus" :
+                typeOrgane.setImageResource(R.drawable.picto_foetus_white);
+                break;
+            case "stomac" :
+                typeOrgane.setImageResource(R.drawable.picto_estomac_white);
+                break;
+            default:
+                typeOrgane.setImageResource(R.drawable.picto_automatique_white);
+                break;
+        }
+
+
         presenter.listenEchographyImageStreaming();
 
     }
